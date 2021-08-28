@@ -1,0 +1,1 @@
+export { default } from './Navigation' // dzieki temu mozna importowac tylko po nazwie katalogu
