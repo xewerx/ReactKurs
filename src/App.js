@@ -1,3 +1,4 @@
+import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './index.css'
 import {
@@ -5,27 +6,30 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
-import { Navigation, Wrapper } from './components';
+import { Navigation, Wrapper, Loading } from './components';
 import theme from './utils/theme';
 
+
 function App() {
+  const { i18n } = useTranslation();
   return (
-    <ThemeProvider theme={theme}>
+    <Fragment>
       <GlobalStyles />
 
       <Router>
         <Navigation
-        items={[
-          { content: 'Homepage', to: '/' },
-          { content: 'Budget', to: '/budget' }
-        ]}
-        RightElement={(
-          <div>
-            <button>pl</button>
-            <button>en</button>
-          </div>
-        )} />
+          items={[
+            { content: 'Homepage', to: '/' },
+            { content: 'Budget', to: '/budget' }
+          ]}
+          RightElement={(
+            <div>
+              <button onClick={() => i18n.changeLanguage('pl')}>pl</button>
+              <button onClick={() => i18n.changeLanguage('en')}>en</button>
+            </div>
+          )} />
         <Wrapper>
           <Switch>
             <Route exact path='/'>Homepage</Route>
@@ -33,8 +37,18 @@ function App() {
           </Switch>
         </Wrapper>
       </Router>
-    </ThemeProvider>
+    </Fragment>
   );
 }
 
-export default App;
+function RootApp() {
+  return (
+    <ThemeProvider theme={theme}>
+      <React.Suspense fallback={<Loading />}>
+        <App />
+      </React.Suspense>
+    </ThemeProvider>
+  )
+}
+
+export default RootApp;
