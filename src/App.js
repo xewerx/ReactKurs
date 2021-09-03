@@ -26,7 +26,7 @@ function App() {
           ]}
           RightElement={(
             <div>
-              <Button variant="inline" onClick={() => i18n.changeLanguage('pl')}>dev branch</Button>
+              <Button variant="inline" onClick={() => i18n.changeLanguage('pl')}>masetr</Button>
               <Button variant="inline" onClick={() => i18n.changeLanguage('en')}>en</Button>
             </div>
           )} />
