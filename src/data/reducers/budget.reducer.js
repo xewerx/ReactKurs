@@ -11,7 +11,7 @@ import {
 } from '../constants';
 
 const IState = {
-    loading: {},
+    loading: null,
     budget: {},
     budgetCategories: []
 }
@@ -23,17 +23,17 @@ function budget(state = IState, action) {
         case BUDGET_GET_REQUEST:
             return {
                 ...state,
-                loadingState: {
-                    ...state.loadingState,
+                loading: {
+                    ...state.loading,
                     [action.type]: LOADING_STATES.LOADING,
                 },
             };
         case BUDGET_GET_SUCCESS:
             delete newLoadingState.BUDGET_GET_REQUEST;
-
+            console.log(state)
             return {
                 ...state,
-                loadingState: newLoadingState,
+                loading: newLoadingState,
                 budget: action.payload,
             };
         case BUDGET_GET_FAILURE:
@@ -41,14 +41,14 @@ function budget(state = IState, action) {
 
             return {
                 ...state,
-                loadingState: newLoadingState,
+                loading: newLoadingState,
                 budget: {},
             };
         case BUDGETED_CATEGORIES_GET_REQUEST:
             return {
                 ...state,
-                loadingState: {
-                    ...state.loadingState,
+                loading: {
+                    ...state.loading,
                     [action.type]: LOADING_STATES.LOADING,
                 },
             };
@@ -57,7 +57,7 @@ function budget(state = IState, action) {
 
             return {
                 ...state,
-                loadingState: newLoadingState,
+                loading: newLoadingState,
                 budgetCategories: action.payload,
             };
         case BUDGETED_CATEGORIES_GET_FAILURE:
@@ -65,7 +65,7 @@ function budget(state = IState, action) {
 
             return {
                 ...state,
-                loadingState: newLoadingState,
+                loading: newLoadingState,
                 budgetCategories: [],
             };
         default:

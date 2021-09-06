@@ -7,7 +7,7 @@ import {
   } from '../constants';
 
 const IState = {
-    loading: {},
+    loading: null,
     allCategories: []
 };
 
@@ -18,8 +18,8 @@ function budget(state = IState, action) {
         case ALL_CATEGORIES_GET_REQUEST:
             return {
                 ...state,
-                loadingState: {
-                    ...state.loadingState,
+                loading: {
+                    ...state.loading,
                     [action.type]: LOADING_STATES.LOADING,
                 },
             };
@@ -28,15 +28,15 @@ function budget(state = IState, action) {
 
             return {
                 ...state,
-                loadingState: newLoadingState,
-                budget: action.req,
+                loading: newLoadingState,
+                budget: action.payload,
             };
         case ALL_CATEGORIES_GET_FAILURE:
             delete newLoadingState.BUDGET_GET_REQUEST;
 
             return {
                 ...state,
-                loadingState: newLoadingState,
+                loading: newLoadingState,
                 budget: {},
             };
         default:
