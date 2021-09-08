@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { fetchBudgetAction, fetchBudgetCategoriesAction } from '../../data/actions/budget.actions';
 import { fetchAllCategoriesAction } from '../../data/actions/common.actions';
-import { Grid } from './components/Budget.css';
+import { Grid } from './Budget.css';
 import LoadingIndicator from '../../components/Loading';
 
 function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudgetCategoriesAction, fetchAllCategoriesAction }) {
@@ -14,15 +14,15 @@ function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudg
       fetchBudgetCategoriesAction(1);
       }, [fetchAllCategoriesAction, fetchBudgetAction, fetchBudgetCategoriesAction]);
 
-      const isLoaded = useMemo(() => (!!commonState && Object.keys(commonState).length === 0) && (!!budgetState && Object.keys(budgetState) === 0), [commonState, budgetState]);
-      console.log(commonState)
+      const isLoaded = useMemo(() => (commonState && budgetState), [commonState, budgetState]);
+      console.log(isLoaded, commonState, budgetState)
     return (
         <Grid>
             <section>
-              {isLoaded ? 'LISTA KATEGOTII' : (<LoadingIndicator></LoadingIndicator>) }
+              {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : "LISTA" }
             </section>
             <section>
-            {isLoaded ? 'LISTA BUDGETOW' : (<LoadingIndicator></LoadingIndicator>) }
+            {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : "LISTA2"}
             </section>
         </Grid>
     )
