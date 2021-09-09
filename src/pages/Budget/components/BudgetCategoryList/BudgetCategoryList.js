@@ -1,9 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { groupBy } from 'lodash';
 
-function BudgetCategoryList() {
+import { ToggleableList } from '../../../../components';
+
+function BudgetCategoryList({ budgetedCategories, allCategories }) {
+    const budgetCategoriesByParent = groupBy(budgetedCategories, item => allCategories.find(category => category.id === item.categoryId).parentCategory.name );
+
+    console.log(budgetedCategories);
+    console.log(budgetCategoriesByParent);
+
     return (
-        <div></div>
+        <div>
+            <ToggleableList
+                items={[]} />
+        </div>
     )
 }
 
-export default BudgetCategoryList;
+export default connect(state => ({
+    budgetedCategories: state.budget.budgetedCategories,
+    allCategories: state.common.allCategories
+}))(BudgetCategoryList);

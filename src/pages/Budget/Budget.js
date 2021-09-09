@@ -5,6 +5,7 @@ import { fetchBudgetAction, fetchBudgetCategoriesAction } from '../../data/actio
 import { fetchAllCategoriesAction } from '../../data/actions/common.actions';
 import { Grid } from './Budget.css';
 import LoadingIndicator from '../../components/Loading';
+import BudgetCategoryList from './components/BudgetCategoryList';
 
 function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudgetCategoriesAction, fetchAllCategoriesAction }) {
 
@@ -19,7 +20,7 @@ function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudg
     return (
         <Grid>
             <section>
-              {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : "LISTA" }
+              {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : <BudgetCategoryList></BudgetCategoryList> }
             </section>
             <section>
             {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : "LISTA2"}
