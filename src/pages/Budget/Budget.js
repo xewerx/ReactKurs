@@ -16,7 +16,7 @@ function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudg
       }, [fetchAllCategoriesAction, fetchBudgetAction, fetchBudgetCategoriesAction]);
 
       const isLoaded = useMemo(() => (commonState && budgetState), [commonState, budgetState]);
-      console.log(isLoaded, commonState, budgetState)
+
     return (
         <Grid>
             <section>

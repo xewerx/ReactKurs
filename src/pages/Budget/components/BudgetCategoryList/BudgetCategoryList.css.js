@@ -1,0 +1,23 @@
+import styled from 'styled-components';
+
+const Category = styled.div`
+  border: 1px solid ${({ theme }) => theme.color.gray.dark};
+  padding: ${({ theme }) => theme.spacing.xs}px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ParentCategory = styled(Category)`
+  background-color: ${({ theme }) => theme.color.gray.normal};
+`;
+export const CategoryItem = styled(Category)`
+  background-color: ${({ theme }) => theme.color.gray.light};
+`;
+export const CategoryAmount = styled.span`
+  font-weight: 700;
+  color: ${({ theme, negative }) => negative ? theme.color.red.normal : theme.color.green.normal}
+`;
+
+export const CategoryList = styled(Category)`
+  background-color: ${({ theme }) => theme.color.gray.light};
+`;

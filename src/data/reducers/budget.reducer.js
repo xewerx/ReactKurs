@@ -22,8 +22,6 @@ function budget(state = IState, action) {
                 loading: true
             };
         case BUDGET_GET_SUCCESS:
-
-            console.log(state)
             return {
                 ...state,
                 loading: false,
@@ -49,7 +47,7 @@ function budget(state = IState, action) {
                 budgetCategories: action.payload,
             };
         case BUDGETED_CATEGORIES_GET_FAILURE:
-
+            console.log(action.error)
             return {
                 ...state,
                 loading: false,

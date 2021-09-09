@@ -21,13 +21,13 @@ function budget(state = IState, action) {
             return {
                 ...state,
                 loading: false,
-                budget: action.payload,
+                allCategories: action.payload,
             };
         case ALL_CATEGORIES_GET_FAILURE:
             return {
                 ...state,
                 loading: false,
-                budget: {},
+                allCategories: [],
             };
         default:
             return state;

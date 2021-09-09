@@ -7,7 +7,7 @@ export const Grid = styled.div`
         flex: 4;
     }
 
-    section:nth-child(1) {
+    section:nth-child(2) {
         flex:8;
     }
 `

@@ -35,7 +35,9 @@ function App() {
         <Wrapper>
           <Switch>
             <Route exact path='/'>Homepage</Route>
-            <Budget />
+            <Route path='/budget'>
+              <Budget />
+            </Route>
           </Switch>
         </Wrapper>
       </Router>
