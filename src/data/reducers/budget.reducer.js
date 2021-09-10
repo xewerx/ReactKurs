@@ -10,8 +10,9 @@ import {
 
 const IState = {
     loading: true,
+    loadingCategories: true,
     budget: {},
-    budgetCategories: []
+    budgetedCategories: []
 }
 
 function budget(state = IState, action) {
@@ -37,21 +38,21 @@ function budget(state = IState, action) {
         case BUDGETED_CATEGORIES_GET_REQUEST:
             return {
                 ...state,
-                loading: true
+                loadingCategories: true
             };
         case BUDGETED_CATEGORIES_GET_SUCCESS:
 
             return {
                 ...state,
-                loading: false,
-                budgetCategories: action.payload,
+                loadingCategories: false,
+                budgetedCategories: action.payload,
             };
         case BUDGETED_CATEGORIES_GET_FAILURE:
             console.log(action.error)
             return {
                 ...state,
-                loading: false,
-                budgetCategories: [],
+                loadingCategories: false,
+                budgetedCategories: [],
             };
         default:
             return state;

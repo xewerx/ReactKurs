@@ -4,6 +4,7 @@ import { CategoryAmount, ParentCategory as Root } from './BudgetCategoryList.css
 import { formatCurrency } from '../../../../utils';
 
 function ParentCategory({ name, onClick, categories, transactions, amount }) {
+
     const categoryLeftValue = useMemo(() => {
         if(!!amount) {
             return null;

@@ -7,23 +7,23 @@ import { Grid } from './Budget.css';
 import LoadingIndicator from '../../components/Loading';
 import BudgetCategoryList from './components/BudgetCategoryList';
 
-function Budget({ budget, commonState, budgetState, fetchBudgetAction, fetchBudgetCategoriesAction, fetchAllCategoriesAction }) {
+function Budget({ budget, commonState, budgetState, loadingCategoriesState, fetchBudgetAction, fetchBudgetCategoriesAction, fetchAllCategoriesAction }) {
 
     useEffect(() => {
       fetchAllCategoriesAction();
       fetchBudgetAction(1);
       fetchBudgetCategoriesAction(1);
       }, [fetchAllCategoriesAction, fetchBudgetAction, fetchBudgetCategoriesAction]);
-
-      const isLoaded = useMemo(() => (commonState && budgetState), [commonState, budgetState]);
-
+      console.log(commonState, budgetState, loadingCategoriesState)
+      const isLoaded = useMemo(() => (!commonState && !budgetState && !loadingCategoriesState), [commonState, budgetState, loadingCategoriesState]);
+      
     return (
         <Grid>
             <section>
-              {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : <BudgetCategoryList></BudgetCategoryList> }
+              {isLoaded ? (<BudgetCategoryList></BudgetCategoryList>) : (<LoadingIndicator></LoadingIndicator>) }
             </section>
             <section>
-            {isLoaded ? (<LoadingIndicator></LoadingIndicator>) : "LISTA2"}
+            {isLoaded ? "LISTA2": (<LoadingIndicator></LoadingIndicator>)}
             </section>
         </Grid>
     )
@@ -33,7 +33,8 @@ export default connect(state => {
     return {
       budget: state.budget.budget,
       commonState: state.common.loading,
-      budgetState: state.budget.loading
+      budgetState: state.budget.loading,
+      loadingCategoriesState: state.budget.loadingCategories
     }
   }, {
     fetchBudgetAction,
