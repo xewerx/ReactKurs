@@ -6,6 +6,7 @@ import { fetchAllCategoriesAction } from '../../data/actions/common.actions';
 import { Grid } from './Budget.css';
 import LoadingIndicator from '../../components/Loading';
 import BudgetCategoryList from './components/BudgetCategoryList';
+import BudgetTransactionList from './components/BudgetTransactionList';
 
 function Budget({ budget, commonState, budgetState, loadingCategoriesState, fetchBudgetAction, fetchBudgetCategoriesAction, fetchAllCategoriesAction }) {
 
@@ -20,10 +21,10 @@ function Budget({ budget, commonState, budgetState, loadingCategoriesState, fetc
     return (
         <Grid>
             <section>
-              {isLoaded ? (<BudgetCategoryList></BudgetCategoryList>) : (<LoadingIndicator></LoadingIndicator>) }
+              {isLoaded ? (<BudgetCategoryList />) : (<LoadingIndicator></LoadingIndicator>) }
             </section>
             <section>
-            {isLoaded ? "LISTA2": (<LoadingIndicator></LoadingIndicator>)}
+            {isLoaded ? (<BudgetTransactionList />) : (<LoadingIndicator></LoadingIndicator>)}
             </section>
         </Grid>
     )

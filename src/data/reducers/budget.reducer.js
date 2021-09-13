@@ -5,14 +5,16 @@ import {
 
     BUDGETED_CATEGORIES_GET_REQUEST,
     BUDGETED_CATEGORIES_GET_SUCCESS,
-    BUDGETED_CATEGORIES_GET_FAILURE
+    BUDGETED_CATEGORIES_GET_FAILURE,
+    SET_SELECTED_PARENT_CATEGORY_ID
 } from '../constants';
 
 const IState = {
     loading: true,
     loadingCategories: true,
     budget: {},
-    budgetedCategories: []
+    budgetedCategories: [],
+    selectedParentCategoryId: undefined
 }
 
 function budget(state = IState, action) {
@@ -54,6 +56,12 @@ function budget(state = IState, action) {
                 loadingCategories: false,
                 budgetedCategories: [],
             };
+        case SET_SELECTED_PARENT_CATEGORY_ID:
+            return {
+                ...state,
+                selectedParentCategoryId: action.payload
+            }     
+        
         default:
             return state;
     }
