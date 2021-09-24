@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { connect } from "react-redux";
 import 'styled-components/macro';
 import { groupBy } from "lodash";
@@ -12,13 +12,23 @@ import { selectParentCategory } from '../../../../data/actions/budget.actions';
 
 function BudgetCategoryList({ budgetedCategories, allCategories, budget, selectParentCategory }) {
   const { t } = useTranslation();
-
+  const handleClickParentCategoryRef = useRef(null);
   const budgetCategoriesByParent = groupBy(
     budgetedCategories,
     (item) =>
       allCategories.find((category) => category.id === item.categoryId)
         .parentCategory.name
   );
+
+  const handleClearParentCategorySelect = () => {
+    selectParentCategory();
+    handleClickParentCategoryRef.current();
+  };
+
+  const handleSelectRestParentCategories = () => {
+    selectParentCategory(null);
+    handleClickParentCategoryRef.current();
+  };
 
   const listItems = Object.entries(budgetCategoriesByParent).map(
     ([parentName, categories]) => ({
@@ -88,16 +98,24 @@ function BudgetCategoryList({ budgetedCategories, allCategories, budget, selectP
         border-bottom: 5px solid ${({ theme }) => theme.color.gray.light };
       `}
       >
-        <ParentCategory name={budget.name} amount={restToSpent} />
+        <ParentCategory 
+          name={budget.name} 
+          amount={restToSpent}
+          onClick={handleClearParentCategorySelect}
+        />
       </div>
 
-      <ToggleableList items={listItems} />
+      <ToggleableList items={listItems} clickRef={handleClickParentCategoryRef} />
 
       <div css={`
         border-top: 5px solid ${({ theme }) => theme.color.gray.light };
       `}
       >
-        <ParentCategory name={t("Other categories")} amount={availableForRestCategories} />
+        <ParentCategory 
+          name={t("Other categories")} 
+          amount={availableForRestCategories} 
+          onClick={handleSelectRestParentCategories}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ const promiseMiddleware = () => (next) => (action) => {
     const { promise, type, ...rest } = action;
 
     if(!promise || typeof promise.then !== 'function') {
-        return next();
+        return next(action);
     }
 
     const REQUEST = `${type}_REQUEST`;
