@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import { groupBy } from 'lodash';
 
@@ -6,8 +6,8 @@ import { List, ListItem } from './BudgetTransactionList.css';
 import { formatCurrency, formDate } from '../../../../utils';
 
 function BudgetTransactionList({ transactions, allCategories, selectedParentCategoryId, budgetedCategories }) {
-    console.log(budgetedCategories)
-    const filteredTransactionsBySelectedCategory = (() => {
+
+    const filteredTransactionsBySelectedCategory = useMemo(() => {
         if (typeof selectedParentCategoryId === 'undefined') {
             return transactions;
         }
@@ -33,12 +33,13 @@ function BudgetTransactionList({ transactions, allCategories, selectedParentCate
                     return false;
                 }
             });
-    })();
+    }, [allCategories, budgetedCategories, selectedParentCategoryId, transactions]);
 
-    const groupedTransactions = groupBy(
+    const groupedTransactions = useMemo(() => groupBy(
         filteredTransactionsBySelectedCategory,
         transaction => new Date(transaction.date).getUTCDate()
-    );
+    ), [filteredTransactionsBySelectedCategory]);
+
     return (
         <List>
             {Object.entries(groupedTransactions).map(([key, transactions]) => (
